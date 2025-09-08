@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="UTF-8">
+  <title>Five Crowns</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#740190">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- The easiest way to include some third-party code is simply putting it into the index.html, just like you would do on any non-UI5 web page. The only thing, you need to keep in mind here, is that you probably want to initialize your code after UI5 has been loaded. To do this, attach your code to the init event of by wrapping it in sap.ui.getCore().attachInit() like this: -->
+  <!--  <script language="javascript" src="path/to/YourLib.js"></script>  -->
+
+
+  <script src="model/model.js"></script>
+  <script src="model/utilities.js"></script>
+  <script src="model/settings.js"></script>
+  <script src="model/statistics.js"></script>
+  <script src="model/games.js"></script>
+  <script src="controller/eventHandler.js"></script>
+  <script src="view/pageMainView.js"></script>
+  <script src="controller/pageMain.controller.js"></script>
+  <script src="view/pageGameView.js"></script>
+  <script src="controller/pageGame.controller.js"></script>
+  <script src="view/pageGameLandscapeView.js"></script>
+  <script src="view/pageGamesView.js"></script>
+  <script src="controller/pageGames.controller.js"></script>
+  <script src="view/pageReorderView.js"></script>
+  <script src="controller/pageReorder.controller.js"></script>
+  <script src="view/pageChangeDealerView.js"></script>
+  <script src="controller/pageChangeDealer.controller.js"></script>
+  <script src="view/pageSettingsView.js"></script>
+  <script src="controller/pageSettings.controller.js"></script>
+  <script src="view/pageInstrView.js"></script>
+  <script src="controller/pageInstr.controller.js"></script>
+  <script src="view/pageStatisticsView.js"></script>
+  <script src="controller/pageStatistics.controller.js"></script>
+  <script src="controller/screenTimeout.js"></script>
+
+
+  <script id="sap-ui-bootstrap" src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
+    data-sap-ui-libs="sap.m, sap.ui.layout" 
+    data-sap-ui-theme="sap_belize"
+    data-sap-ui-xx-fakeOS="android" data-sap-ui-compatVersion="edge" data-sap-ui-async="true"
+    data-sap-ui-onInit="module:sap/ui/core/ComponentSupport" data-sap-ui-resourceroots='{"fiveCrowns": "./"}'
+    data-sap-ui-preload="async">
+    </script>
+
+
+  <script>
+    sap.ui.getCore().attachInit(function () {
+
+      // Initialize model
+      fiveCrowns.model.init();
+
+      // Initialize layouts
+      oApp = fiveCrowns.model.getApp();
+      fiveCrowns.pageMainView.layout(oApp);
+      fiveCrowns.pageGameView.layout(oApp);
+      fiveCrowns.pageGameLandscapeView.layout(oApp);
+      fiveCrowns.pageReorderView.layout(oApp);
+      fiveCrowns.pageChangeDealerView.layout(oApp);
+      fiveCrowns.pageSettingsView.layout(oApp);
+      fiveCrowns.pageStatisticsView.layout(oApp);
+      fiveCrowns.pageGamesView.layout(oApp);
+      fiveCrowns.pageInstrView.layout(oApp);
+      oApp.placeAt("content");
+    });
+
+  </script>
+
+</head>
+
+<body class="sapUiBody" id="content">
+  <div></div>
+  <script>
+    function enableFullScreenOnUserGesture() {
+      requestFullScreen();
+      document.body.removeEventListener('click', enableFullScreenOnUserGesture);
+      document.body.removeEventListener('touchstart', enableFullScreenOnUserGesture);
+    }
+    document.body.addEventListener('click', enableFullScreenOnUserGesture);
+    document.body.addEventListener('touchstart', enableFullScreenOnUserGesture);
+  </script>
+</body>
+
+
+</html>
