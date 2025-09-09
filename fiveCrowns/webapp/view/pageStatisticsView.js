@@ -58,18 +58,6 @@ fiveCrowns.pageStatisticsView = (function () {
       page.addStyleClass("myCustomBackground");
       frmStatistics.addStyleClass("myLabelFontColorBlack");
 
-      // Prevent pull-to-refresh on mobile
-      page.addEventDelegate({
-        onTouchMove: function(oEvent) {
-          if (oEvent && oEvent.originalEvent && oEvent.originalEvent.touches && oEvent.originalEvent.touches.length === 1) {
-            var touch = oEvent.originalEvent.touches[0];
-            if (touch.clientY < 100) {
-              oEvent.preventDefault();
-            }
-          }
-        }
-      });
-
 
     },
 
