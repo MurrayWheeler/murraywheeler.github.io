@@ -60,7 +60,7 @@ fiveCrowns.pageMainView = (function () {
       }
       hBox.addItem(playerCount);
       hBox.addItem(new sap.m.ToolbarSpacer({ width: "30px" }));
-      playButton = new sap.m.Button({ text: "New Game >" });
+      playButton = new sap.m.Button({ text: "New Game" });
       playButton.attachPress(function () { fiveCrowns.pageMainController.onPlayButton(oApp) });
       hBox.addItem(playButton);
 
@@ -90,6 +90,18 @@ fiveCrowns.pageMainView = (function () {
 
       // menuMain.addStyleClass("myCustomBackground");
       popoverMain.addStyleClass("myMenuStyle");
+
+      // Prevent pull-to-refresh on mobile
+      page.addEventDelegate({
+        onTouchMove: function(oEvent) {
+          if (oEvent && oEvent.originalEvent && oEvent.originalEvent.touches && oEvent.originalEvent.touches.length === 1) {
+            var touch = oEvent.originalEvent.touches[0];
+            if (touch.clientY < 100) {
+              oEvent.preventDefault();
+            }
+          }
+        }
+      });
 
     },
 
