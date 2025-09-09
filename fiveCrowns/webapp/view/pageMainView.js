@@ -60,7 +60,7 @@ fiveCrowns.pageMainView = (function () {
       }
       hBox.addItem(playerCount);
       hBox.addItem(new sap.m.ToolbarSpacer({ width: "30px" }));
-      playButton = new sap.m.Button({ text: "New Game S&B" });
+      playButton = new sap.m.Button({ text: "New Game" });
       playButton.attachPress(function () { fiveCrowns.pageMainController.onPlayButton(oApp) });
       hBox.addItem(playButton);
 
@@ -103,13 +103,15 @@ fiveCrowns.pageMainView = (function () {
         }
       });
 
-      // Catch Android back button (browser back)
-      window.addEventListener('popstate', function (event) {
-        // Is this event for all screens?
-        // If yes, how do I know what screen I'm on?
-        // If no, how do I know it's for this screen?
-        fiveCrowns.pageMainController.onBack(oApp);
-      });
+      // // Catch Android back button (browser back)
+      // window.addEventListener('popstate', function (event) {
+      //   // Is this event for all screens?
+      //   // If yes, how do I know what screen I'm on?
+      //   // If no, how do I know it's for this screen?
+      //   fiveCrowns.pageMainController.onBack(oApp);
+      // });
+
+
     },
 
 

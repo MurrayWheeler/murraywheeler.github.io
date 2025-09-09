@@ -138,6 +138,18 @@ fiveCrowns.pageGameView = (function () {
       barTotal.addStyleClass("myToolbarFontSize");
       barTotal.addStyleClass("myTableInputMargins");
 
+      // Prevent pull-to-refresh on mobile
+      page.addEventDelegate({
+        onTouchMove: function(oEvent) {
+          if (oEvent && oEvent.originalEvent && oEvent.originalEvent.touches && oEvent.originalEvent.touches.length === 1) {
+            var touch = oEvent.originalEvent.touches[0];
+            if (touch.clientY < 100) {
+              oEvent.preventDefault();
+            }
+          }
+        }
+      });
+
 
     },
 
