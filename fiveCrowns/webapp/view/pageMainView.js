@@ -60,7 +60,7 @@ fiveCrowns.pageMainView = (function () {
       }
       hBox.addItem(playerCount);
       hBox.addItem(new sap.m.ToolbarSpacer({ width: "30px" }));
-      playButton = new sap.m.Button({ text: "New Game" });
+      playButton = new sap.m.Button({ text: "New Game TT" });
       playButton.attachPress(function () { fiveCrowns.pageMainController.onPlayButton(oApp) });
       hBox.addItem(playButton);
 
