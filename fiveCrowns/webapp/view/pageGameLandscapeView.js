@@ -52,7 +52,7 @@ fiveCrowns.pageGameLandscapeView = (function () {
       rounds = fiveCrowns.model.getModel().rounds;
       for (let roundNum = 0; roundNum < fiveCrowns.model.getMaxRounds(); roundNum++) {
         if (roundNum < 8) {
-          roundName = 'R' + rounds[roundNum].round;
+          roundName = fiveCrowns.settings.oSettings.roundPrefix + rounds[roundNum].round;
         } else {
           roundName = rounds[roundNum].round;
         }
@@ -128,6 +128,7 @@ fiveCrowns.pageGameLandscapeView = (function () {
       tabPlayers.addStyleClass("myTableFontColor");
       tabPlayers.addStyleClass("myTableFontSize");
       tabPlayers.addStyleClass("myTruncateStyle");
+      tabPlayers.addStyleClass("myLandscapeHeader");
 
 
     },

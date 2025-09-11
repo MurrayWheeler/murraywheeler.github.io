@@ -2,12 +2,16 @@
 
 /* Test dragging */
 .dragging {
-    position: absolute; /* Ensures the element can be moved freely */
-    pointer-events: none; /* Prevents accidental interactions */
-    z-index: 1000; /* Ensures the element is above other content */
-    opacity: 0.8; /* Makes the element semi-transparent for better UX */
-  }
-  
+    position: absolute;
+    /* Ensures the element can be moved freely */
+    pointer-events: none;
+    /* Prevents accidental interactions */
+    z-index: 1000;
+    /* Ensures the element is above other content */
+    opacity: 0.8;
+    /* Makes the element semi-transparent for better UX */
+}
+
 .myCustomBackground {
     /*    background-color: rebeccapurple !important; /* !important ensures it overrides default styles */
     background-color: #740190 !important;
@@ -24,8 +28,10 @@
 }
 
 .myTableRowHeight .sapMLIB {
-    height: 20px !important; /* Force smaller row height */
-    line-height: 20px !important; /* Adjust line height for text alignment */
+    height: 20px !important;
+    /* Force smaller row height */
+    line-height: 20px !important;
+    /* Adjust line height for text alignment */
 }
 
 .myTableFontColor {
@@ -53,6 +59,18 @@
     /* Ensure text inside cells is also styled */
 }
 
+.myLandscapeHeader .sapMTableTH {
+    background-color: #740190 !important;
+}
+
+.myLandscapeHeader .sapMTableTH .sapMText {
+    color: yellow !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 20px !important;
+    font-weight: normal !important;
+    background-color: transparent !important;
+}
+
 .myLabelFontColorBlack .sapMLabel {
     color: black !important;
     /* Ensure text inside cells is also styled */
@@ -78,10 +96,19 @@
     /* Ensure text inside cells is also styled */
 }
 
+
+.myLnkFontColor,
+.myLnkFontColor .sapMLnk {
+    color: yellow !important;
+    font-size: 20px !important;
+    /* Ensure text inside cells is also styled */
+}
+
 .myLeftJustifyButton .sapMBtnInner {
     justify-content: flex-start !important;
     text-align: left !important;
-    background-color: #B379C1 !important; /* Change to your desired color */
+    background-color: #B379C1 !important;
+    /* Change to your desired color */
     color: black !important;
     font-size: 20px !important;
 }
@@ -149,15 +176,18 @@
 
 .myTruncateStyle .sapMListTblHeader .sapMInputBaseInner,
 .myTruncateStyle .sapMText {
-    white-space: nowrap;     /* Prevent wrapping */
-    overflow: hidden;        /* Hide overflow */
-    text-overflow: clip;     /* No ellipsis, just cut off the text */
+    white-space: nowrap;
+    /* Prevent wrapping */
+    overflow: hidden;
+    /* Hide overflow */
+    text-overflow: clip;
+    /* No ellipsis, just cut off the text */
 }
 
 .myMenuStyle,
 .myMenuStyle .sapMText,
 .myMenuStyle .sapMMenuItem {
-        color: yellow;
+    color: yellow;
 }
 
 .myHeaderToolbar {

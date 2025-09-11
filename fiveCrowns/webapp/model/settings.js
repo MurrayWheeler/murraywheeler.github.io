@@ -12,6 +12,7 @@ fiveCrowns.settings = (function () {
         // Properties
         // ====================================================
         this.playerPrefix = "P";
+        this.roundPrefix = 'r';
         this.defaultPlayerCount = 3;
         this.screenTimeout = 300;
         // this.pageTransition = "slide";

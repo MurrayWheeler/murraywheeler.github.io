@@ -70,6 +70,13 @@ fiveCrowns.pageGameController = (function () {
         highlightDealer(oGame);
     };
 
+
+    function handleRound() {
+        unHighlightRoundLabels();
+        highlightRoundLabel(oGame.currentDealer);  
+    };
+
+
     function calcCurrentRound(oGame) {
         // Current round is the latest round with no score against a player
         var currentRound = null;
@@ -118,9 +125,15 @@ fiveCrowns.pageGameController = (function () {
             column = playerNum + 1; // Offset to step over "Round" column
             tabRounds.getColumns()[column].getHeader().setValueState("None");
             tabRounds.getColumns()[column].getHeader().setValueStateText("");
+            if (tabRounds.getColumns()[column].getHeader().getValue()[0] == '*') {
+                tabRounds.getColumns()[column].getHeader().setValue(tabRounds.getColumns()[column].getHeader().getValue().substring(1));
+            }
             // Landscape (column 1)
             tabPlayers.getItems()[playerNum].getCells()[0].setValueState("None");
             tabPlayers.getItems()[playerNum].getCells()[0].setValueStateText("");
+            if (tabPlayers.getItems()[playerNum].getCells()[0].getValue()[0] == '*') {
+                tabPlayers.getItems()[playerNum].getCells()[0].setValue(tabPlayers.getItems()[playerNum].getCells()[0].getValue().substring(1));
+            }
         }
     }
 
@@ -129,8 +142,10 @@ fiveCrowns.pageGameController = (function () {
         column = currentDealer + 1; // Offset to step over "Round" column
         tabRounds.getColumns()[column].getHeader().setValueState("Error");
         tabRounds.getColumns()[column].getHeader().setValueStateText("Dealer");
+        tabRounds.getColumns()[column].getHeader().setValue('*' + tabRounds.getColumns()[column].getHeader().getValue());
         tabPlayers.getItems()[currentDealer].getCells()[0].setValueState("Error");
         tabPlayers.getItems()[currentDealer].getCells()[0].setValueStateText("Dealer");
+        tabPlayers.getItems()[currentDealer].getCells()[0].setValue('*' + tabPlayers.getItems()[currentDealer].getCells()[0].getValue());
     }
 
 
@@ -184,6 +199,37 @@ fiveCrowns.pageGameController = (function () {
         tabPlayers.getItems()[rowLand].getCells()[colLand].setValueState("Information");
         tabPlayers.getItems()[rowLand].getCells()[colLand].setValueStateText("Dealer");
     };
+
+
+
+    function unHighlightRoundLabels() {
+        for (let roundNum = 0; roundNum < fiveCrowns.model.getMaxRounds(); roundNum++) {
+            // Portrait (column 1)
+            if (tabRounds.getItems()[roundNum].getCells()[0].getText()[0] == '*') {
+                tabRounds.getItems()[roundNum].getCells()[0].setText(tabRounds.getItems()[roundNum].getCells()[0].getText().substring(1));
+            }
+            // Landscape (column header)
+            column = roundNum + 1; // Offset to step over "Player" column
+            if (tabPlayers.getColumns()[column].getHeader().getText()[0] == '*') {
+                tabPlayers.getColumns()[column].getHeader().setText(tabPlayers.getColumns()[column].getHeader().getText().substring(1));
+            }
+        }
+    }
+
+
+    function highlightRoundLabel() {
+                //  var oGame = fiveCrowns.model.getModel();
+        var currentRound = fiveCrowns.model.getModel().getCurrentRound(oGame);
+        // var calcRound = calcCurrentRound(oGame);
+        // oGame.setCurrentRound(currentRound);
+        // var currentDealer = getCurrentDealer(currentRound, oGame);
+        // oGame.setCurrentDealer(currentDealer);
+
+        // currentRound = oGame.getRound();
+        column = currentRound + 1; // Offset to step over "Player" column
+        tabRounds.getItems()[currentRound].getCells()[0].setText('*' + tabRounds.getItems()[currentRound].getCells()[0].getText());
+        tabPlayers.getColumns()[column].getHeader().setText('*' + tabPlayers.getColumns()[column].getHeader().getText());
+    }
 
 
     function tabStopSet() {
@@ -252,6 +298,7 @@ fiveCrowns.pageGameController = (function () {
             fiveCrowns.model.updateTotals();
             refreshScreenTotals(oGame.playerCount);
             handleDealer();
+            handleRound();
             // highlightRound(oGame);
             hideKeyboard(element.getId() + "-inner");
         },

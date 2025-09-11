@@ -43,10 +43,11 @@ fiveCrowns.pageChangeDealerView = (function () {
 
       // Add cells
       colItemDealer = new sap.m.ColumnListItem({});
-      // colItemDealer.addCell(new sap.m.RadioButton({ value: "{selected}", change: function () { fiveCrowns.pageChangeDealerController.onChangeDealer(this) } }));
-      // colItemDealer.addCell(new sap.m.RadioButton({ id: "idRadioButton", groupName: "rbGroup1" }));
-      colItemDealer.addCell(new sap.m.RadioButton({ selected: "{selected}", groupName: "rbGroup1" }));
-      colItemDealer.addCell(new sap.m.Text({ text: "{playerName}" }));
+      colItemDealer.addCell(new sap.m.RadioButton({ selected: "{selected}", groupName: "rbGroup1", select: function () { fiveCrowns.pageChangeDealerController.onChangeDealerRB(oApp); } }));
+      playerLabel = new sap.m.Link({ text: "{playerName}", press: function () { fiveCrowns.pageChangeDealerController.onChangeDealerSelect(this); } });
+      playerLabel.addStyleClass("myLnkFontColor");
+      colItemDealer.addCell(playerLabel);
+      // colItemDealer.addCell(new sap.m.Link({ text: "{playerName}", press: function () { fiveCrowns.pageChangeDealerController.onChangeDealerSelect(this); } }));
 
       tabChangeDealer.bindAggregation("items", "/players", colItemDealer);
       page.addContent(tabChangeDealer);
@@ -58,6 +59,7 @@ fiveCrowns.pageChangeDealerView = (function () {
       // Load custom CSS
       jQuery.sap.includeStyleSheet("css/style.css");
       page.addStyleClass("myCustomBackground");
+
 
       tabChangeDealer.addStyleClass("myTableBackground");
       tabChangeDealer.addStyleClass("myTableFontColor");
