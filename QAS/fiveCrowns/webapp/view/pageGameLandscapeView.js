@@ -51,11 +51,7 @@ fiveCrowns.pageGameLandscapeView = (function () {
       tabPlayers.getColumns()[0].setWidth("15%");
       rounds = fiveCrowns.model.getModel().rounds;
       for (let roundNum = 0; roundNum < fiveCrowns.model.getMaxRounds(); roundNum++) {
-        if (roundNum < 8) {
-          roundName = fiveCrowns.settings.oSettings.roundPrefix + rounds[roundNum].round;
-        } else {
-          roundName = rounds[roundNum].round;
-        }
+        roundName = rounds[roundNum].round;
         roundHeaderId = 'roundName-' + roundNum;
         tabPlayers.addColumn(new sap.m.Column({ header: new sap.m.Text({ id: roundHeaderId, text: roundName, wrapping: false }) }));
       }

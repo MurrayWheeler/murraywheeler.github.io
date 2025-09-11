@@ -6,7 +6,6 @@ fiveCrowns.model = (function () {
 
     const maxPlayers = 7;
     const maxRounds = 11;
-    const playerPrefix = "P";
     const gameLocalStorage = "fiveCrowns.gameData";
 
     // var oPlayer = new Object;
@@ -151,10 +150,10 @@ fiveCrowns.model = (function () {
 
     // Get round name
     function getRoundName(roundNum) {
-        if (roundNum <= 7) {
+        if (roundNum < 8) {
             roundNumText = roundNum + 3;
-            // roundName = 'Rnd' + roundNumText;
-            roundName = roundNumText;
+            roundPrefix = fiveCrowns.settings.oSettings.getRoundPrefix();
+            roundName = roundPrefix + roundNumText;
         } else {
             switch (roundNum) {
                 case 8: roundName = 'Jack'; break;
@@ -183,7 +182,6 @@ fiveCrowns.model = (function () {
 
     function defaultPlayerName(playerNum) {
         var playerNumber = playerNum + 1;
-        // var playerName = playerPrefix + playerNumber;
         // This is generated at the initial load. IE Need to reload the app to see new prefix
         var playerName = fiveCrowns.settings.oSettings.getPlayerPrefix() + playerNumber;
         return playerName;
@@ -207,12 +205,22 @@ fiveCrowns.model = (function () {
         localStorage.setItem(gameLocalStorage, gameJson);
     };
 
+
     function loadGame() {
         // Retrieving data:
         let gameJson = localStorage.getItem(gameLocalStorage);
         if (!gameJson) return;
         let oGameValues = JSON.parse(gameJson);
         fiveCrowns.model.setModelValues(oGameValues);
+    };
+
+
+    function resetRoundNames() {
+        oGame = fiveCrowns.model.getModel();
+        roundPrefix = fiveCrowns.settings.oSettings.getRoundPrefix();
+        for (let i = 0; i < 8; i++) {
+            oGame.rounds[i].round = roundPrefix + (i + 3);  
+        }
     };
 
 
@@ -231,8 +239,8 @@ fiveCrowns.model = (function () {
             createApp();
             createGame();
             loadSavedData();
+            resetRoundNames();   // Round names get set by loadSavedData(). We need to do this to update the round prefix if it has changed.
             fiveCrowns.eventHandler.registerEvents();
-            // fiveCrowns.eventHandler.registerEvents(oEvent);
         },
 
         /**

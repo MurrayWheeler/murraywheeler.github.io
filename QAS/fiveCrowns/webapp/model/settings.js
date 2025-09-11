@@ -34,6 +34,15 @@ fiveCrowns.settings = (function () {
         }
 
 
+        this.getRoundPrefix = function () {
+            return this.roundPrefix;
+        }
+
+        this.setRoundPrefix = function (roundPrefix) {
+            this.roundPrefix = roundPrefix;
+        }
+
+
         this.getScreenTimeout = function () {
             return this.screenTimeout;
         }

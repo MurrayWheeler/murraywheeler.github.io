@@ -218,14 +218,7 @@ fiveCrowns.pageGameController = (function () {
 
 
     function highlightRoundLabel() {
-                //  var oGame = fiveCrowns.model.getModel();
         var currentRound = fiveCrowns.model.getModel().getCurrentRound(oGame);
-        // var calcRound = calcCurrentRound(oGame);
-        // oGame.setCurrentRound(currentRound);
-        // var currentDealer = getCurrentDealer(currentRound, oGame);
-        // oGame.setCurrentDealer(currentDealer);
-
-        // currentRound = oGame.getRound();
         column = currentRound + 1; // Offset to step over "Player" column
         tabRounds.getItems()[currentRound].getCells()[0].setText('*' + tabRounds.getItems()[currentRound].getCells()[0].getText());
         tabPlayers.getColumns()[column].getHeader().setText('*' + tabPlayers.getColumns()[column].getHeader().getText());
