@@ -1,0 +1,21 @@
+{
+  "name": "Five Crowns",
+  "short_name": "Five Crowns",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#740190",
+  "theme_color": "#740190",
+  "description": "Five Crowns card game webapp",
+  "icons": [
+    {
+      "src": "resources/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "resources/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
