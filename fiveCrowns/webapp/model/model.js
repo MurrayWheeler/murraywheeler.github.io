@@ -6,7 +6,6 @@ fiveCrowns.model = (function () {
 
     const maxPlayers = 7;
     const maxRounds = 11;
-    const playerPrefix = "P";
     const gameLocalStorage = "fiveCrowns.gameData";
 
     // var oPlayer = new Object;
@@ -43,7 +42,7 @@ fiveCrowns.model = (function () {
         // Scores: 11 rounds x maxPlayers
         this.rounds = new Array;
         for (let roundNum = 0; roundNum < maxRounds; roundNum++) {
-            roundName = getRoundName(roundNum);
+            roundName = getRoundNameP(roundNum);
             this.rounds.push({ round: roundName, s0: '', s1: '', s2: '', s3: '', s4: '', s5: '', s6: '', s7: '' });
         };
         // Scores: 11 rounds x maxPlayers
@@ -150,11 +149,13 @@ fiveCrowns.model = (function () {
 
 
     // Get round name
-    function getRoundName(roundNum) {
-        if (roundNum <= 7) {
+    function getRoundNameP(roundNum) {
+        roundPrefixP = fiveCrowns.settings.oSettings.getRoundPrefixP();
+        let roundName = '';
+        let roundNumText = '';
+        if (roundNum < 8) {
             roundNumText = roundNum + 3;
-            // roundName = 'Rnd' + roundNumText;
-            roundName = roundNumText;
+            roundName = roundPrefixP + roundNumText;
         } else {
             switch (roundNum) {
                 case 8: roundName = 'Jack'; break;
@@ -165,6 +166,27 @@ fiveCrowns.model = (function () {
         };
         return roundName;
     }
+
+
+    // Get round name Landscape
+    function getRoundNameL(roundNum) {
+        roundPrefixL = fiveCrowns.settings.oSettings.getRoundPrefixL();
+        let roundName = '';
+        let roundNumText = '';
+        if (roundNum < 8) {
+            roundNumText = roundNum + 3;
+            roundName = roundPrefixL + roundNumText;
+        } else {
+            switch (roundNum) {
+                case 8: roundName = 'Jack'; break;
+                case 9: roundName = 'Queen'; break;
+                case 10: roundName = 'King'; break;
+                default:
+            };
+        };
+        return roundName;
+    }
+
 
     function createApp() {
         oApp = new sap.m.App("myApp", { initialPage: "pageMain" });
@@ -183,7 +205,6 @@ fiveCrowns.model = (function () {
 
     function defaultPlayerName(playerNum) {
         var playerNumber = playerNum + 1;
-        // var playerName = playerPrefix + playerNumber;
         // This is generated at the initial load. IE Need to reload the app to see new prefix
         var playerName = fiveCrowns.settings.oSettings.getPlayerPrefix() + playerNumber;
         return playerName;
@@ -207,6 +228,7 @@ fiveCrowns.model = (function () {
         localStorage.setItem(gameLocalStorage, gameJson);
     };
 
+
     function loadGame() {
         // Retrieving data:
         let gameJson = localStorage.getItem(gameLocalStorage);
@@ -216,11 +238,22 @@ fiveCrowns.model = (function () {
     };
 
 
+    function resetRoundNames() {
+        oGame = fiveCrowns.model.getModel();
+        roundPrefixP = fiveCrowns.settings.oSettings.getRoundPrefixP();
+        for (let i = 0; i < 8; i++) {
+            oGame.rounds[i].round = roundPrefixP + (i + 3);
+        }
+    };
+
+
 
 
     return {
 
         saveGame: saveGame,
+        getRoundNameL: getRoundNameL,
+        getRoundNameP: getRoundNameP,
 
         /**
          * Initialise model
@@ -231,8 +264,8 @@ fiveCrowns.model = (function () {
             createApp();
             createGame();
             loadSavedData();
+            resetRoundNames();   // Round names get set by loadSavedData(). We need to do this to update the round prefix if it has changed.
             fiveCrowns.eventHandler.registerEvents();
-            // fiveCrowns.eventHandler.registerEvents(oEvent);
         },
 
         /**

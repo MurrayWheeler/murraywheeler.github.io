@@ -50,8 +50,14 @@ fiveCrowns.pageGameLandscapeView = (function () {
       // tabPlayers.addColumn(new sap.m.Column({ header: menuButton }));
       tabPlayers.getColumns()[0].setWidth("15%");
       rounds = fiveCrowns.model.getModel().rounds;
+      // roundPrefixL = fiveCrowns.settings.oSettings.getRoundPrefixL();
       for (let roundNum = 0; roundNum < fiveCrowns.model.getMaxRounds(); roundNum++) {
-        roundName = rounds[roundNum].round;
+        // if (roundNum < 8) {
+        //   roundName = roundPrefixL + rounds[roundNum].round;
+        // } else {
+        //   roundName = rounds[roundNum].round;
+        // }
+        roundName = fiveCrowns.model.getRoundNameL(roundNum);
         roundHeaderId = 'roundName-' + roundNum;
         tabPlayers.addColumn(new sap.m.Column({ header: new sap.m.Text({ id: roundHeaderId, text: roundName, wrapping: false }) }));
       }

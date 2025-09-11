@@ -12,7 +12,8 @@ fiveCrowns.settings = (function () {
         // Properties
         // ====================================================
         this.playerPrefix = "P";
-        this.roundPrefix = 'r';
+        this.roundPrefixP = 'Rnd';
+        this.roundPrefixL = 'r';
         this.defaultPlayerCount = 3;
         this.screenTimeout = 300;
         // this.pageTransition = "slide";
@@ -34,12 +35,20 @@ fiveCrowns.settings = (function () {
         }
 
 
-        this.getRoundPrefix = function () {
-            return this.roundPrefix;
+        this.getRoundPrefixP = function () {
+            return this.roundPrefixP;
         }
 
-        this.setRoundPrefix = function (roundPrefix) {
-            this.roundPrefix = roundPrefix;
+        this.setRoundPrefixP = function (roundPrefixP) {
+            this.roundPrefixP = roundPrefixP;
+        }
+
+        this.getRoundPrefixL = function () {
+            return this.roundPrefixL;
+        }
+
+        this.setRoundPrefixL = function (roundPrefixL) {
+            this.roundPrefixL = roundPrefixL;
         }
 
 

@@ -14,6 +14,7 @@ fiveCrowns.pageMainController = (function () {
         fiveCrowns.pageGameController.refreshPlayerNames(players);
         fiveCrowns.pageGameController.highlightDealer(fiveCrowns.model.getModel());
         fiveCrowns.pageGameController.highlightRound(fiveCrowns.model.getModel());
+        fiveCrowns.pageGameController.handleRound();
         if (sap.ui.Device.orientation.portrait) {
             oApp.to("pageGame", fiveCrowns.settings.oSettings.getPageTransition());
         } else {
