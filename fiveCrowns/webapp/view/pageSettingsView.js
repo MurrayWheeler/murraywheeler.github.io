@@ -34,12 +34,11 @@ fiveCrowns.pageSettingsView = (function () {
       var oModel = new sap.ui.model.json.JSONModel(fiveCrowns.settings.oSettings);
       frmSettings.setModel(oModel);
 
-      frmSettings.addContent(new sap.m.Label({ text: "Portrait round prefix (requires restart)" }));
+      frmSettings.addContent(new sap.m.Label({ text: "Portrait round prefix" }));
       frmSettings.addContent(new sap.m.Input({ value: "{/roundPrefixP}", change: function () { fiveCrowns.pageSettingsController.onTimeout(this) } }));
-      frmSettings.addContent(new sap.m.Label({ text: "Landscape round prefix (requires restart)" }));
-      frmSettings.addContent(new sap.m.Input({ value: "{/roundPrefixL}", change: function () { fiveCrowns.pageSettingsController.onTimeout(this) } }));
-      // frmSettings.addContent(new sap.m.Label({ text: "Default player prefix" }));
-      // frmSettings.addContent(new sap.m.Input({ value: "{/playerPrefix}" }));
+      frmSettings.addContent(new sap.m.Label({ text: "Landscape round prefix" }));
+      // frmSettings.addContent(new sap.m.Input({ value: "{/roundPrefixL}", change: function () { fiveCrowns.pageSettingsController.onTimeout(this) } }));
+      frmSettings.addContent(new sap.m.Input({ value: "{/roundPrefixL}", change: function () { fiveCrowns.pageSettingsController.onLandscapePrefix(this) } }));
       frmSettings.addContent(new sap.m.Label({ text: "Screen timeout (seconds)" }));
       frmSettings.addContent(new sap.m.Input({ value: "{/screenTimeout}", type: "Number", change: function () { fiveCrowns.pageSettingsController.onTimeout(this) } }));
 

@@ -28,18 +28,19 @@ fiveCrowns.model = (function () {
         this.currentDealer = 0;     // Array index
         this.currentRound = 0;      // Array index
         this.playerCount = 0;
+        // Players for Landscape view
         this.players = new Array;
         for (let playerNum = 0; playerNum < maxPlayers; playerNum++) {
             this.players.push({
                 playerPosition: playerNum + 1,
-                playerId: 0,
+                // playerId: 0,
                 playerName: '',
                 // playerName: defaultPlayerName(playerNum),
                 r0: '', r1: '', r2: '', r3: '', r4: '', r5: '', r6: '', r7: '', r8: '', r9: '', r10: '',
                 t0: 0
             });
         };
-        // Scores: 11 rounds x maxPlayers
+        // Rounds for Portrait view
         this.rounds = new Array;
         for (let roundNum = 0; roundNum < maxRounds; roundNum++) {
             roundName = getRoundNameP(roundNum);
@@ -395,6 +396,7 @@ fiveCrowns.model = (function () {
             oGame.gameId = fiveCrowns.games.getNextGameId();
             oGame.gameDate = new Date();
             oGame.gameName = oGame.gameDate.toString().substring(0, 24);
+            resetRoundNames();   // Round names get set by loadSavedData(). We need to do this to update the round prefix if it has changed.
         },
 
 
