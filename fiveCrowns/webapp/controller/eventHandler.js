@@ -49,9 +49,29 @@ fiveCrowns.eventHandler = (function() {
 
                     // Check if it was a downward swipe from the top
                     if (window.scrollY === 0 && touchendY > touchstartY + swipeThreshold) {
-                        console.log("Swipe down detected!");
-                        // You can trigger a custom action here, like a manual refresh.
-                        // For example: sap.m.MessageToast.show("Refresh action triggered!");
+                        var currentPageId = fiveCrowns.model.getApp().getCurrentPage().getId();
+                        if (currentPageId === "pageGame" || currentPageId === "pageGameLandscape") {
+                            // Create confirmation dialog for new game
+                            var oDialog = new sap.m.Dialog({
+                                title: "New Game",
+                                type: "Message",
+                                content: new sap.m.Text({ text: "Are you sure you want to start a new game?" }),
+                                beginButton: new sap.m.Button({
+                                    text: "Yes",
+                                    press: function () {
+                                        fiveCrowns.pageGameController.onNewGame();
+                                        oDialog.close();
+                                    }
+                                }),
+                                endButton: new sap.m.Button({
+                                    text: "No",
+                                    press: function () {
+                                        oDialog.close();
+                                    }
+                                }),
+                                afterClose: function () { oDialog.destroy(); }
+                            }).open();
+                        }
                     }
 
                     var deltaX = touchendX - touchStartX;
