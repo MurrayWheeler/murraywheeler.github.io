@@ -15,6 +15,10 @@ fiveCrowns.eventHandler = (function() {
                 fiveCrowns.eventHandler.onOrientationChange(oEvent);
             });
 
+            // Catch Android back button (browser back)
+            window.addEventListener('popstate', fiveCrowns.eventHandler.onBrowserBack);
+            history.pushState(null, ''); // Push an initial state to the history
+
             // Listen for touch start to record the initial position
             document.addEventListener('touchstart', function(event) {
                 // Only track single-finger touches
@@ -113,6 +117,45 @@ fiveCrowns.eventHandler = (function() {
             };
         },
 
+        onBrowserBack: function(event) {
+            // Prevent the default back behavior
+            event.preventDefault();
+
+            // Push a new state to "catch" the next back button press
+            history.pushState(null, '');
+
+            var currentPageId = fiveCrowns.model.getApp().getCurrentPage().getId();
+
+            // Don't go back if on the main page, as there's nowhere to go.
+            if (currentPageId === "pageMain") {
+                // You could show a toast message asking if the user wants to exit.
+                // For now, we'll just do nothing.
+                return;
+            }
+
+            // Use the existing back handlers for each page
+            switch (currentPageId) {
+                case "pageGame":
+                case "pageGameLandscape":
+                    fiveCrowns.pageGameController.onBack(oApp);
+                    break;
+                case "pageGames":
+                    fiveCrowns.pageGamesController.onGamesBack(oApp);
+                    break;
+                case "pageReorder":
+                    fiveCrowns.pageReorderController.onReorderBack(oApp);
+                    break;
+                case "pageChangeDealer":
+                    fiveCrowns.pageChangeDealerController.onChangeDealerBack(oApp);
+                    break;
+                case "pageSettings":
+                    fiveCrowns.pageSettingsController.onSettingsBack(oApp);
+                    break;
+                default: // For pages like Statistics, Instructions
+                    oApp.back();
+                    break;
+            }
+        },
 
     };
 
