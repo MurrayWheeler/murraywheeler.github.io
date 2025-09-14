@@ -23,8 +23,7 @@ fiveCrowns.pageInstrView = (function () {
       page.setCustomHeader(barInstrHeader);
 
       // Add instructions from HTML file
-      var oHtml = new sap.ui.core.HTML({ content: '<iframe src="resources/FiveCrowns.html" width="100%" height="100%" style="border:none;"></iframe>' });
-      page.addContent(oHtml);
+      page.addContent(new sap.ui.core.HTML("htmlInstructions"));
 
 
       // Add page to app
@@ -40,4 +39,3 @@ fiveCrowns.pageInstrView = (function () {
   };
 
 }());
-
