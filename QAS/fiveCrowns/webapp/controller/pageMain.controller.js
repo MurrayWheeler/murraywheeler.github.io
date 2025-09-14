@@ -83,8 +83,8 @@ fiveCrowns.pageMainController = (function () {
                     title: "About Five Crowns",
                     content: new sap.m.VBox({
                         items: [
-                            new sap.m.Text({ text: "Version: 1.00.00 (First release)" }),
-                            new sap.m.Text({ text: "Developed by: Murray Wheeler" })
+                            new sap.m.Text({ text: "- Version: 1.00.00 (First release)" }),
+                            new sap.m.Text({ text: "- Developed by: Murray Wheeler" })
                         ]
                     }).addStyleClass("sapUiContentPadding"),
                     endButton: new sap.m.Button({ text: "Close", press: () => this.oAboutDialog.close() })

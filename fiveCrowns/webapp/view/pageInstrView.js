@@ -13,7 +13,6 @@ fiveCrowns.pageInstrView = (function () {
       // Create page
       var page = new sap.m.Page("pageInstr", { title: "Five Crowns" });
 
-
       // Add Header bar
       var barInstrHeader = new sap.m.Toolbar({ id: "idBarInstrHeader" });
       barInstrHeader.addContent(new sap.m.Image({ src: "resources/crown.png", width: "80px", height: "45px" }));
@@ -23,8 +22,12 @@ fiveCrowns.pageInstrView = (function () {
       page.setCustomHeader(barInstrHeader);
 
       // Add instructions from HTML file
-      var oHtml = new sap.ui.core.HTML({ content: '<iframe src="resources/FiveCrowns.html" width="100%" height="100%" style="border:none;"></iframe>' });
-      page.addContent(oHtml);
+      page.addContent(new sap.ui.core.HTML("htmlInstructions"));
+
+      // Attach the onBeforeShow event to load the instructions
+      page.addEventDelegate({
+        onBeforeShow: fiveCrowns.pageInstrController.onBeforeShow
+      });
 
 
       // Add page to app
@@ -40,4 +43,3 @@ fiveCrowns.pageInstrView = (function () {
   };
 
 }());
-

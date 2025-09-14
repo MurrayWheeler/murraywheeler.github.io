@@ -5,8 +5,8 @@ fiveCrowns.pageMainController = (function () {
 
     function gotoGame(oApp) {
         requestFullScreen();
-        var players = fiveCrowns.model.getPlayerCount();
-        document.getElementById("playerCount-inner").value = players;
+        const players = fiveCrowns.model.getPlayerCount();
+        sap.ui.getCore().byId("playerCount").setValue(players);
         fiveCrowns.pageGameController.hideUnusedPlayers(players);
         tabRounds.getModel().refresh();
         tabPlayers.getModel().refresh();
@@ -37,12 +37,9 @@ fiveCrowns.pageMainController = (function () {
         gotoGame: gotoGame,
 
         onPlayerCount: function (element) {
-            var playerCnt = element.getValue();
-            // var elementId = element.getId();
-            // oGame = fiveCrowns.model.getModel();
-            // oGame.setPlayerCount(playerCount);
+            const playerCnt = element.getValue();
             fiveCrowns.model.setPlayerCount(playerCnt);
-            var players = fiveCrowns.model.getPlayerCount();
+            const players = fiveCrowns.model.getPlayerCount();
             element.setValue(players);
             hideKeyboard(element.getId() + "-inner");
         },
@@ -50,7 +47,7 @@ fiveCrowns.pageMainController = (function () {
 
         onPlayButton: function (oApp) {
             fiveCrowns.model.clearScores();
-            fiveCrowns.model.setPlayerCount(playerCount.getValue());   // Get player count from screen
+            fiveCrowns.model.setPlayerCount(sap.ui.getCore().byId("playerCount").getValue());   // Get player count from screen
             fiveCrowns.model.newGame();
             fiveCrowns.pageGameController.setGameEditable(true);
             gotoGame(oApp);
@@ -81,7 +78,19 @@ fiveCrowns.pageMainController = (function () {
         onAbout: function (oApp) {
             requestFullScreen();
             sap.ui.getCore().byId("popoverMain").close()
-            sap.m.MessageToast.show("Five Crowns\nv1.00.00 (First release)\nDeveloped by:\nMurray Wheeler");
+            if (!this.oAboutDialog) {
+                this.oAboutDialog = new sap.m.Dialog({
+                    title: "About Five Crowns",
+                    content: new sap.m.VBox({
+                        items: [
+                            new sap.m.Text({ text: "- Version: 1.00.00 (First release)" }),
+                            new sap.m.Text({ text: "- Developed by: Murray Wheeler" })
+                        ]
+                    }).addStyleClass("sapUiContentPadding"),
+                    endButton: new sap.m.Button({ text: "Close", press: () => this.oAboutDialog.close() })
+                });
+            }
+            this.oAboutDialog.open();
         },
 
         onInstr: function (oApp) {
@@ -92,20 +101,6 @@ fiveCrowns.pageMainController = (function () {
 
         onBack: function (oApp) {
             window.close();
-            // exitFullScreen();
-
-            // If I manage to get the close app to work, I may want to add a confirm dialog
-
-            // For Hybrid Apps (e.g., with Cordova, Capacitor)
-            // If your app is packaged as a native or hybrid mobile app using frameworks like Apache Cordova, Capacitor, or similar, you can use plugins to programmatically close the app.
-
-            // Using Cordova
-            // Install the cordova-plugin-exit plugin:
-            // cordova plugin add cordova-plugin-exit
-
-            // Then, use it in your JavaScript code:
-            // navigator.app.exitApp();
-
         },
 
 

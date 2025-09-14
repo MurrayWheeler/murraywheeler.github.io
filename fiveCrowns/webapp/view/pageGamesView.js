@@ -26,17 +26,9 @@ fiveCrowns.pageGamesView = (function () {
 
 
       // Table layout
-      // tabGames = new sap.m.Table({ id: "idGamesTable", mode: "MultiSelect", includeItemInSelection: true });
       tabGames = new sap.m.Table({ id: "idGamesTable", sticky: ["ColumnHeaders", "HeaderToolbar", "InfoToolbar"] });
       var oModel = new sap.ui.model.json.JSONModel(fiveCrowns.games.getModel());
       tabGames.setModel(oModel);
-
-      // Row press event no longer wanted. Code left for reference
-      // tabGames.attachSelectionChange(function (oEvent) { fiveCrowns.pageGamesController.onRowPress(oEvent); });
-
-      // Add columns
-      // tabGames.addColumn(new sap.m.Column({ header: new sap.m.Text({ text: "Bin" }) }));
-      // tabGames.addColumn(new sap.m.Column({ header: new sap.m.Text({ text: "Game" }) }));
       tabGames.addColumn(new sap.m.Column({}));  // No header defined for column
       tabGames.addColumn(new sap.m.Column({}));  // No header defined for column
       tabGames.getColumns()[0].setWidth("15%");
@@ -65,13 +57,9 @@ fiveCrowns.pageGamesView = (function () {
       tabGames.addStyleClass("myButtonFontSize");
       tabGames.addStyleClass("myTableInputMargins");
 
-
-      playButton.addStyleClass("myButtonFontSize");
-
     },
 
 
   };
 
 }());
-

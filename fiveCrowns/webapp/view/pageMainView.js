@@ -14,9 +14,6 @@ fiveCrowns.pageMainView = (function () {
       var page = new sap.m.Page("pageMain", { title: "Five Crowns" });
 
 
-      // Use popover (instead of sap.m.Menu), so it does not go to small screen on a mobile
-      // var menuButtonNew = new sap.m.Button({ type: "Transparent", icon: "sap-icon://media-play", text: "New game", press: function () { fiveCrowns.pageMainController.onNewGame(oApp); } });
-      // var menuButtonResume = new sap.m.Button({ type: "Transparent", icon: "sap-icon://restart", text: "Resume game", press: function () { fiveCrowns.pageMainController.onResumeGame(oApp); } });
       var menuButtonSettings = new sap.m.Button({ type: "Transparent", icon: "sap-icon://action-settings", text: "Settings", press: function () { fiveCrowns.pageMainController.onSettings(oApp); } });
       var menuButtonStatistics = new sap.m.Button({ type: "Transparent", icon: "sap-icon://database", text: "Statistics", press: function () { fiveCrowns.pageMainController.onStatistics(oApp); } });
       var menuButtonHelp = new sap.m.Button({ type: "Transparent", icon: "sap-icon://sys-help", text: "Help", press: function () { fiveCrowns.pageMainController.onHelp(oApp); } });
@@ -51,7 +48,7 @@ fiveCrowns.pageMainView = (function () {
       playersLabel = new sap.m.Label({ text: "Players" });
       hBox.addItem(playersLabel);
       hBox.addItem(new sap.m.ToolbarSpacer({ width: "10px" }));
-      playerCount = new sap.m.Input({ id: "playerCount", placeholder: "Number of players", type: "Number", width: "80px", change: function () { fiveCrowns.pageMainController.onPlayerCount(this) } });
+      playerCount = new sap.m.StepInput({ id: "playerCount", min: 1, max: 7, width: "100px", change: function () { fiveCrowns.pageMainController.onPlayerCount(this) } });
       let iPlayerCount = fiveCrowns.model.getPlayerCount();
       if (iPlayerCount) {
         playerCount.setValue(iPlayerCount);    // If we have a previously set player count, then use it
@@ -67,7 +64,7 @@ fiveCrowns.pageMainView = (function () {
       vBox.addItem(new sap.m.Text({ text: "" }));
       vBox.addItem(new sap.m.Text({ text: "" }));
       vBox.addItem(new sap.m.Text({ text: "" }));
-      resumeButton = new sap.m.Button({ text: "Resume Game", press: function () { fiveCrowns.pageMainController.onResumeGame(oApp) } });
+      resumeButton = new sap.m.Button({ text: "Resume Game", tooltip: "You can also swipe left to resume", press: function () { fiveCrowns.pageMainController.onResumeGame(oApp) } });
       vBox.addItem(resumeButton);
 
       vBox.addItem(new sap.m.Text({ text: "" }));
@@ -91,27 +88,6 @@ fiveCrowns.pageMainView = (function () {
       // menuMain.addStyleClass("myCustomBackground");
       popoverMain.addStyleClass("myMenuStyle");
 
-      // // Prevent pull-to-refresh on mobile
-      // // Not working
-      // page.addEventDelegate({
-      //   onTouchMove: function(oEvent) {
-      //     if (oEvent && oEvent.originalEvent && oEvent.originalEvent.touches && oEvent.originalEvent.touches.length === 1) {
-      //       var touch = oEvent.originalEvent.touches[0];
-      //       if (touch.clientY < 100) {
-      //         oEvent.preventDefault();
-      //       }
-      //     }
-      //   }
-      // });
-
-      // // Catch Android back button (browser back)
-      // window.addEventListener('popstate', function (event) {
-      //   // Is this event for all screens?
-      //   // If yes, how do I know what screen I'm on?
-      //   // If no, how do I know it's for this screen?
-      //   fiveCrowns.pageMainController.onBack(oApp);
-      // });
-
 
     },
 
@@ -119,4 +95,3 @@ fiveCrowns.pageMainView = (function () {
   };
 
 }());
-

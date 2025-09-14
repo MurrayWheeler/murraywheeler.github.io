@@ -1,21 +1,27 @@
 {
-  "name": "Five Crowns",
-  "short_name": "Five Crowns",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#740190",
-  "theme_color": "#740190",
-  "description": "Five Crowns card game webapp",
-  "icons": [
-    {
-      "src": "resources/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
+    "_version": "1.12.0",
+    "sap.app": {
+        "id": "fivecrowns",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "applicationVersion": {
+            "version": "1.0.0"
+        }
     },
-    {
-      "src": "resources/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+    "sap.ui": {
+        "technology": "UI5",
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "fiveCrowns.view.pageMain",
+            "type": "JS"
+        }
     }
-  ]
 }

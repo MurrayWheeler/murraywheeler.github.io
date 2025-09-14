@@ -25,8 +25,3 @@ fiveCrowns.pageInstrController = (function() {
     };
 
 }());
-
-// Attach the onBeforeShow event to the instructions page
-sap.ui.getCore().attachInit(function() {
-    sap.ui.getCore().byId("pageInstr").attachBeforeShow(fiveCrowns.pageInstrController.onBeforeShow);
-});

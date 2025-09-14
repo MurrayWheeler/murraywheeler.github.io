@@ -8,6 +8,41 @@ fiveCrowns.eventHandler = (function() {
         touchendY = 0;
     var swipeThreshold = 50; // Minimum distance for a swipe
 
+    /**
+     * Centralized back navigation logic based on the current page.
+     */
+    function handleBackNavigation() {
+        const currentPageId = fiveCrowns.model.getApp().getCurrentPage().getId();
+        const oApp = fiveCrowns.model.getApp();
+
+        // Don't go back if on the main page.
+        if (currentPageId === "pageMain") {
+            return;
+        }
+
+        switch (currentPageId) {
+            case "pageGame":
+            case "pageGameLandscape":
+                fiveCrowns.pageGameController.onBack(oApp);
+                break;
+            case "pageGames":
+                fiveCrowns.pageGamesController.onGamesBack(oApp);
+                break;
+            case "pageReorder":
+                fiveCrowns.pageReorderController.onReorderBack(oApp);
+                break;
+            case "pageChangeDealer":
+                fiveCrowns.pageChangeDealerController.onChangeDealerBack(oApp);
+                break;
+            case "pageSettings":
+                fiveCrowns.pageSettingsController.onSettingsBack(oApp);
+                break;
+            default: // For pages like Statistics, Instructions with simple back nav
+                oApp.back();
+                break;
+        }
+    }
+
     return {
 
         registerEvents: function() {
@@ -87,28 +122,7 @@ fiveCrowns.eventHandler = (function() {
                     } else {
                         // Check for swipe right on any other page to go back
                         if (deltaX > swipeThreshold && Math.abs(deltaX) > Math.abs(deltaY)) {
-                            switch (currentPageId) {
-                                case "pageGame":
-                                case "pageGameLandscape":
-                                    fiveCrowns.pageGameController.onBack(oApp);
-                                    break;
-                                case "pageGames":
-                                    fiveCrowns.pageGamesController.onGamesBack(oApp);
-                                    break;
-                                case "pageReorder":
-                                    fiveCrowns.pageReorderController.onReorderBack(oApp);
-                                    break;
-                                case "pageChangeDealer":
-                                    fiveCrowns.pageChangeDealerController.onChangeDealerBack(oApp);
-                                    break;
-                                case "pageSettings":
-                                    fiveCrowns.pageSettingsController.onSettingsBack(oApp);
-                                    break;
-                                case "pageStatistics":
-                                case "pageInstr":
-                                    oApp.back(); // These pages have a simple back navigation
-                                    break;
-                            }
+                            handleBackNavigation();
                         }
                     }
                 }
@@ -144,37 +158,7 @@ fiveCrowns.eventHandler = (function() {
             // Push a new state to "catch" the next back button press
             history.pushState(null, '');
 
-            var currentPageId = fiveCrowns.model.getApp().getCurrentPage().getId();
-
-            // Don't go back if on the main page, as there's nowhere to go.
-            if (currentPageId === "pageMain") {
-                // You could show a toast message asking if the user wants to exit.
-                // For now, we'll just do nothing.
-                return;
-            }
-
-            // Use the existing back handlers for each page
-            switch (currentPageId) {
-                case "pageGame":
-                case "pageGameLandscape":
-                    fiveCrowns.pageGameController.onBack(oApp);
-                    break;
-                case "pageGames":
-                    fiveCrowns.pageGamesController.onGamesBack(oApp);
-                    break;
-                case "pageReorder":
-                    fiveCrowns.pageReorderController.onReorderBack(oApp);
-                    break;
-                case "pageChangeDealer":
-                    fiveCrowns.pageChangeDealerController.onChangeDealerBack(oApp);
-                    break;
-                case "pageSettings":
-                    fiveCrowns.pageSettingsController.onSettingsBack(oApp);
-                    break;
-                default: // For pages like Statistics, Instructions
-                    oApp.back();
-                    break;
-            }
+            handleBackNavigation();
         },
 
     };
