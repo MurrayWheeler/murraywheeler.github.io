@@ -219,6 +219,9 @@ fiveCrowns.pageGameController = (function () {
 
     function highlightRoundLabel() {
         var currentRound = fiveCrowns.model.getModel().getCurrentRound();
+        if ( currentRound >= fiveCrowns.model.getMaxRounds() ) {
+            return; // No more rounds to highlight
+        }
         column = currentRound + 1; // Offset to step over "Player" column
         tabRounds.getItems()[currentRound].getCells()[0].setText('*' + tabRounds.getItems()[currentRound].getCells()[0].getText());
         tabPlayers.getColumns()[column].getHeader().setText('*' + tabPlayers.getColumns()[column].getHeader().getText());
